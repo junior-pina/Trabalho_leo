@@ -1,0 +1,48 @@
+<div class="appointments-container">
+    <h2>Agendamentos</h2>
+    {{#if error}}
+        <div class="error">{{error}}</div>
+    {{/if}}
+    
+    <div class="appointments-actions">
+        <a href="/appointments/new" class="btn btn-primary">Novo Agendamento</a>
+    </div>
+
+    <div class="appointments-list">
+        {{#if appointments.length}}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Serviço</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each appointments}}
+                        <tr>
+                            <td>{{clientName}}</td>
+                            <td>{{phone}}</td>
+                            <td>{{service}}</td>
+                            <td>{{appointmentDate}}</td>
+                            <td>{{appointmentTime}}</td>
+                            <td>{{status}}</td>
+                            <td class="actions">
+                                <a href="/appointments/edit/{{id}}" class="btn btn-small">Editar</a>
+                                <form action="/appointments/delete/{{id}}" method="POST" style="display: inline;">
+                                    <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza que deseja excluir este agendamento?')">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        {{else}}
+            <p>Nenhum agendamento encontrado.</p>
+        {{/if}}
+    </div>
+</div>

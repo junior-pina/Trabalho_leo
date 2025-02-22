@@ -1,0 +1,46 @@
+<div class="appointment-form">
+    <h2>Novo Agendamento</h2>
+    {{#if error}}
+        <div class="error">{{error}}</div>
+    {{/if}}
+    
+    <form action="/appointments" method="POST">
+        <div class="form-group">
+            <label for="clientName">Nome do Cliente:</label>
+            <input type="text" id="clientName" name="clientName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="service">Serviço:</label>
+            <select id="service" name="service" required>
+                <option value="">Selecione um serviço</option>
+                <option value="Corte de Cabelo">Corte de Cabelo</option>
+                <option value="Manicure">Manicure</option>
+                <option value="Pedicure">Pedicure</option>
+                <option value="Coloração">Coloração</option>
+                <option value="Hidratação">Hidratação</option>
+                <option value="Escova">Escova</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentDate">Data:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentTime">Horário:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime" required>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
+            <a href="/appointments" class="btn">Cancelar</a>
+        </div>
+    </form>
+</div>

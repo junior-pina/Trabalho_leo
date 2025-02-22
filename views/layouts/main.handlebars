@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salão de Beleza - Sistema de Agendamentos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Início</a></li>
+            {{#if session.userId}}
+                <li><a href="/appointments">Agendamentos</a></li>
+                <li><a href="/users/logout">Sair</a></li>
+            {{else}}
+                <li><a href="/users/login">Entrar</a></li>
+                <li><a href="/users/register">Cadastrar</a></li>
+            {{/if}}
+        </ul>
+    </nav>
+
+    <div class="container">
+        {{{body}}}
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

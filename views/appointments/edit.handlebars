@@ -1,0 +1,54 @@
+<div class="appointment-form">
+    <h2>Editar Agendamento</h2>
+    {{#if error}}
+        <div class="error">{{error}}</div>
+    {{/if}}
+    
+    <form action="/appointments/edit/{{appointment.id}}" method="POST">
+        <div class="form-group">
+            <label for="clientName">Nome do Cliente:</label>
+            <input type="text" id="clientName" name="clientName" value="{{appointment.clientName}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Telefone:</label>
+            <input type="tel" id="phone" name="phone" value="{{appointment.phone}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="service">Serviço:</label>
+            <select id="service" name="service" required>
+                <option value="Corte de Cabelo" {{#if (eq appointment.service "Corte de Cabelo")}}selected{{/if}}>Corte de Cabelo</option>
+                <option value="Manicure" {{#if (eq appointment.service "Manicure")}}selected{{/if}}>Manicure</option>
+                <option value="Pedicure" {{#if (eq appointment.service "Pedicure")}}selected{{/if}}>Pedicure</option>
+                <option value="Coloração" {{#if (eq appointment.service "Coloração")}}selected{{/if}}>Coloração</option>
+                <option value="Hidratação" {{#if (eq appointment.service "Hidratação")}}selected{{/if}}>Hidratação</option>
+                <option value="Escova" {{#if (eq appointment.service "Escova")}}selected{{/if}}>Escova</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentDate">Data:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate" value="{{appointment.appointmentDate}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="appointmentTime">Horário:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime" value="{{appointment.appointmentTime}}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="scheduled" {{#if (eq appointment.status "scheduled")}}selected{{/if}}>Agendado</option>
+                <option value="completed" {{#if (eq appointment.status "completed")}}selected{{/if}}>Concluído</option>
+                <option value="cancelled" {{#if (eq appointment.status "cancelled")}}selected{{/if}}>Cancelado</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a href="/appointments" class="btn">Cancelar</a>
+        </div>
+    </form>
+</div>
