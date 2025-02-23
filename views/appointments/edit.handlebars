@@ -5,16 +5,17 @@
     {{/if}}
     
     <form action="/appointments/edit/{{appointment.id}}" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="form-group">
             <label for="clientName">Nome do Cliente:</label>
             <input type="text" id="clientName" name="clientName" value="{{appointment.clientName}}" required>
         </div>
-
+        
         <div class="form-group">
             <label for="phone">Telefone:</label>
             <input type="tel" id="phone" name="phone" value="{{appointment.phone}}" required>
         </div>
-
+        
         <div class="form-group">
             <label for="service">Serviço:</label>
             <select id="service" name="service" required>
@@ -46,9 +47,9 @@
             </select>
         </div>
 
-        <div class="form-actions">
+        <div class="d-flex gap-2">
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            <a href="/appointments" class="btn">Cancelar</a>
+            <a href="/appointments" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 </div>

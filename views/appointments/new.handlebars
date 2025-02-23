@@ -1,24 +1,28 @@
-<div class="appointment-form">
+<div class="container">
     <h2>Novo Agendamento</h2>
-    {{#if error}}
-        <div class="error">{{error}}</div>
-    {{/if}}
-    
     <form action="/appointments" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="form-group">
-            <label for="clientName">Nome do Cliente:</label>
-            <input type="text" id="clientName" name="clientName" required>
+            <label for="clientSearch">Buscar Cliente:</label>
+            <input type="text" id="clientSearch" class="form-control" placeholder="Digite o nome do cliente">
+            <div id="searchResults" class="list-group mt-2"></div>
         </div>
 
-        <div class="form-group">
-            <label for="phone">Telefone:</label>
-            <input type="tel" id="phone" name="phone" required>
+        <div id="clientForm">
+            <input type="hidden" id="selectedClientId" name="selectedClientId">
+            <div class="form-group">
+                <label for="clientName">Nome do Cliente:</label>
+                <input type="text" id="clientName" name="clientName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefone:</label>
+                <input type="tel" id="phone" name="phone" class="form-control" required>
+            </div>
         </div>
 
         <div class="form-group">
             <label for="service">Serviço:</label>
-            <select id="service" name="service" required>
-                <option value="">Selecione um serviço</option>
+            <select id="service" name="service" class="form-control" required>
                 <option value="Corte de Cabelo">Corte de Cabelo</option>
                 <option value="Manicure">Manicure</option>
                 <option value="Pedicure">Pedicure</option>
@@ -27,20 +31,77 @@
                 <option value="Escova">Escova</option>
             </select>
         </div>
-
         <div class="form-group">
             <label for="appointmentDate">Data:</label>
-            <input type="date" id="appointmentDate" name="appointmentDate" required>
+            <input type="date" id="appointmentDate" name="appointmentDate" class="form-control" required>
         </div>
 
         <div class="form-group">
             <label for="appointmentTime">Horário:</label>
-            <input type="time" id="appointmentTime" name="appointmentTime" required>
+            <input type="time" id="appointmentTime" name="appointmentTime" class="form-control" required>
         </div>
 
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
-            <a href="/appointments" class="btn">Cancelar</a>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Agendar</button>
+            <a href="/appointments" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
+</div>
+
+<!-- Modal de Registro de Cliente -->
+<div class="modal fade" id="clientRegistrationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar Novo Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="clientRegistrationForm">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <div class="form-group">
+                        <label for="firstName">Nome:</label>
+                        <input type="text" id="firstName" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Sobrenome:</label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone:</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Endereço:</label>
+                        <input type="text" id="address" name="address" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="neighborhood">Bairro:</label>
+                        <input type="text" id="neighborhood" name="neighborhood" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Cidade:</label>
+                        <input type="text" id="city" name="city" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="birthDate">Data de Nascimento:</label>
+                        <input type="date" id="birthDate" name="birthDate" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="saveClient">Salvar</button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveClient">Salvar</button>
+            </div>
+        </div>
+    </div>
 </div>

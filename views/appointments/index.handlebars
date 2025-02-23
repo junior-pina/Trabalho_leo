@@ -1,13 +1,12 @@
 <div class="appointments-container">
-    <h2>Agendamentos</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Agendamentos</h2>
+        <a href="/appointments/new" class="btn btn-primary">Novo Agendamento</a>
+    </div>
     {{#if error}}
         <div class="error">{{error}}</div>
     {{/if}}
     
-    <div class="appointments-actions">
-        <a href="/appointments/new" class="btn btn-primary">Novo Agendamento</a>
-    </div>
-
     <div class="appointments-list">
         {{#if appointments.length}}
             <table>
@@ -34,6 +33,7 @@
                             <td class="actions">
                                 <a href="/appointments/edit/{{id}}" class="btn btn-small">Editar</a>
                                 <form action="/appointments/delete/{{id}}" method="POST" style="display: inline;">
+                                    <input type="hidden" name="_csrf" value="{{../csrfToken}}">
                                     <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Tem certeza que deseja excluir este agendamento?')">Excluir</button>
                                 </form>
                             </td>
